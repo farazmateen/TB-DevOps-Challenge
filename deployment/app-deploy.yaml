@@ -14,9 +14,11 @@ spec:
       labels:
         app: my-app
     spec:
+      imagePullSecrets:
+      - name: dockerconfigjson-github-com
       containers:
       - name: my-app-container
-        image: app:latest
+        image: ghcr.io/farazmateen/tb-do-image:latest
         ports:
         - containerPort: 8000
         resources:
@@ -57,4 +59,8 @@ spec:
               configMapKeyRef:
                 name: my-app-config
                 key: REDIS_DB
-
+          - name: REDIS_PASSWORD
+            valueFrom:
+              configMapKeyRef:
+                name: my-app-config
+                key: REDIS_PASSWORD
