@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Release.Name }}-config
+data:
+  ENVIRONMENT: {{ .Values.env.ENVIRONMENT }}
+  HOST: {{ .Values.env.HOST }}
+  PORT: {{ .Values.env.PORT }}
+  REDIS_HOST: {{ .Values.env.REDIS_HOST }}
+  REDIS_PORT: {{ .Values.env.REDIS_PORT }}
+  REDIS_DB: {{ .Values.env.REDIS_DB }}
