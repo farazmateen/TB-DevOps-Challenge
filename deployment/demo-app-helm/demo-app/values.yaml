@@ -32,12 +32,12 @@ autoscaling:
   # targetMemoryUtilizationPercentage: 80
 
 env:
-  ENVIRONMENT: DEV
+  ENVIRONMENT: PROD
   HOST: localhost
-  PORT: "8000"
+  PORT: '8000'
   REDIS_HOST: redis-service.redis.svc.cluster.local
-  REDIS_PORT: "6379"
-  REDIS_DB: "0"
+  REDIS_PORT: '6379'
+  REDIS_DB: '0'
 
 nodeSelector: {}
 

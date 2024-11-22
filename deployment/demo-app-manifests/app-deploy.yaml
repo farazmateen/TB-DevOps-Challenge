@@ -2,10 +2,10 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: my-app
+  namespace: my-app
   labels:
     app: my-app
 spec:
-  replicas: 3
   selector:
     matchLabels:
       app: my-app
@@ -14,6 +14,13 @@ spec:
       labels:
         app: my-app
     spec:
+      topologySpreadConstraints:
+      - maxSkew: 1
+        topologyKey: kubernetes.io/hostname
+        whenUnsatisfiable: ScheduleAnyway
+        labelSelector:
+          matchLabels:
+            app: demo-app
       imagePullSecrets:
       - name: dockerconfigjson-github-com
       containers:
@@ -59,8 +66,15 @@ spec:
               configMapKeyRef:
                 name: my-app-config
                 key: REDIS_DB
-          - name: REDIS_PASSWORD
-            valueFrom:
-              configMapKeyRef:
-                name: my-app-config
-                key: REDIS_PASSWORD
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 8000
+          initialDelaySeconds: 5
+          periodSeconds: 10
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 8000
+          initialDelaySeconds: 5
+          periodSeconds: 10

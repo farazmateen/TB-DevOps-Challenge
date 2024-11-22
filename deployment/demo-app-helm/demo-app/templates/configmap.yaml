@@ -2,6 +2,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: {{ .Release.Name }}-config
+  namespace: {{ .Release.Name }}
 data:
   ENVIRONMENT: {{ .Values.env.ENVIRONMENT }}
   HOST: {{ .Values.env.HOST }}

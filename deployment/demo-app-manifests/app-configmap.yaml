@@ -2,11 +2,11 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: my-app-config
+  namespace: my-app
 data:
-  ENVIRONMENT: DEV
+  ENVIRONMENT: PROD
   HOST: localhost
   PORT: "8000"
   REDIS_HOST: redis-service.redis.svc.cluster.local
   REDIS_PORT: "6379"
   REDIS_DB: "0"
-  REDIS_PASSWORD: "password"
